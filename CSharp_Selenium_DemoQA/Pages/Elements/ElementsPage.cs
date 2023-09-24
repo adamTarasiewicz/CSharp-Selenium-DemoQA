@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace CSharp_Selenium_DemoQA
+namespace CSharp_Selenium_DemoQA.Pages.Elements
 {
     internal class ElementsPage : BasePage
     {
