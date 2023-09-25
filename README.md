@@ -2,6 +2,8 @@
 
 Automated E2E UI tests for a mock [DemoQA Website](https://demoqa.com/) using C#, MSTest and Selenium WebDriver.
 
+[![.NET Core CI - DemoQA Tests](https://github.com/adamTarasiewicz/CSharp-Selenium-DemoQA/actions/workflows/main.yml/badge.svg)](https://github.com/adamTarasiewicz/CSharp-Selenium-DemoQA/actions/workflows/main.yml)
+
 This project aims to validate the functionality and user interactions on the DemoQA website, ensuring a seamless user experience.
 
 Expected Outcomes:
