@@ -2,10 +2,10 @@
 
 namespace CSharp_Selenium_DemoQA.Pages.Elements
 {
-    internal class ElementsPage : BasePage
+    internal class TextBoxPage : BasePage
     {
         // constructor
-        public ElementsPage(IWebDriver driver) : base(driver)
+        public TextBoxPage(IWebDriver driver) : base(driver)
         {
         }
         // properties
@@ -17,16 +17,17 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
         public string Email => Driver.FindElement(By.XPath("//p[@id='email']")).GetAttribute("textContent");
         public string CurrentAddress => Driver.FindElement(By.XPath("//p[@id='currentAddress']")).GetAttribute("textContent");
         public string PermanentAddress => Driver.FindElement(By.XPath("//p[@id='permanentAddress']")).GetAttribute("textContent");
+        public IWebElement Submit => Driver.FindElement(By.Id("submit"));
 
         // methods
-        internal void FillOutFormAndSubmit(string userName, string userEmail, string currentAddress, string permanentAddress)
+        internal void FillOutFormAndSubmit(TestUser user)
         {
-            FullNameField.SendKeys(userName);
-            EmailField.SendKeys(userEmail);
-            CurrentAddressField.SendKeys(currentAddress);
-            PermanentAddressField.SendKeys(permanentAddress);
+            FullNameField.SendKeys(user.FullName);
+            EmailField.SendKeys(user.Email);
+            CurrentAddressField.SendKeys(user.CurrentAddress);
+            PermanentAddressField.SendKeys(user.PermanentAddress);
 
-            Driver.FindElement(By.Id("submit")).Click();
+            Submit.Click();
         }
         internal void GoTo()
         {
