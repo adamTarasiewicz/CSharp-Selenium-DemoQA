@@ -111,7 +111,10 @@ namespace CSharp_Selenium_DemoQA.Tests
         private IWebDriver GetChromeDriver()
         {
             var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            return new ChromeDriver(outPutDirectory);
+            var chromeOptions = new ChromeOptions();
+            chromeOptions.AddArgument("--headless");
+            chromeOptions.AddArgument("--window-size=1920,1080");
+            return new ChromeDriver(outPutDirectory, chromeOptions);
         }
     }
 }

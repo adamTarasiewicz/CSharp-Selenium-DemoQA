@@ -31,9 +31,9 @@ namespace CSharp_Selenium_DemoQA.Pages.Forms
         public IWebElement SportsCheckBox => Driver.FindElement(By.XPath("//label[@for='hobbies-checkbox-1']"));
         public IWebElement ReadingCheckBox => Driver.FindElement(By.XPath("//label[@for='hobbies-checkbox-2']"));
         public IWebElement MusicCheckBox => Driver.FindElement(By.XPath("//label[@for='hobbies-checkbox-3']"));
-        public IWebElement SelectState => Driver.FindElement(By.XPath("//div[@class=' css-yk16xz-control']//div[@class=' css-1hwfws3']//div[@class=' css-1wa3eu0-placeholder']"));
+        public IWebElement SelectState => Driver.FindElement(By.XPath("//div[@class=' css-1wa3eu0-placeholder' and text()='Select State']/.."));
         public IWebElement SelectStateHaryana => Driver.FindElement(By.XPath("//div[text()='Haryana']"));
-        public IWebElement SelectCity => Driver.FindElement(By.XPath("//div[@class=' css-1hwfws3']//div[@class=' css-1wa3eu0-placeholder']"));
+        public IWebElement SelectCity => Driver.FindElement(By.XPath("//div[@class=' css-1wa3eu0-placeholder' and text()='Select City']/.."));
         public IWebElement SelectCityKarnal => Driver.FindElement(By.XPath("//div[text()='Karnal']"));
         public IWebElement Submit => Driver.FindElement(By.Id("submit"));
 
@@ -60,26 +60,32 @@ namespace CSharp_Selenium_DemoQA.Pages.Forms
             SportsCheckBox.Click();
             ReadingCheckBox.Click();
             MusicCheckBox.Click();
-            
+
             CurrentAddressField.SendKeys(user.CurrentAddress);
 
-            // Select state and city
-            SelectState.Click();
-            SelectStateHaryana.Click();
-            SelectCity.Click();
-            SelectCityKarnal.Click();
-
-            //Select state and city
+            SelectStateAndCity();
 
             Submit.Click();
 
+        }
+
+        private void SelectStateAndCity()
+        {
+            Actions actions = new Actions(Driver);
+            actions.Click(SelectState);
+            actions.SendKeys("Haryana");
+            actions.SendKeys(Keys.Enter).Perform();
+
+            actions.Click(SelectCity);
+            actions.SendKeys("Karnal");
+            actions.SendKeys(Keys.Enter).Perform();
         }
 
         private void SendLetterMAndChooseMathAndClickEnter()
         {
             Actions actions = new Actions(Driver);
             actions.SendKeys("M").Perform();
-            actions.SendKeys(Keys.Return).Perform();
+            actions.SendKeys(Keys.Enter).Perform();
         }
 
         private void SetGender(TestUser user)
