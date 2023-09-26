@@ -14,19 +14,12 @@ namespace CSharp_Selenium_DemoQA.Pages.Forms
         }
 
         public IWebElement FirstNameField => Driver.FindElement(By.Id("firstName"));
-
         public IWebElement LastNameField => Driver.FindElement(By.Id("lastName"));
-
         public IWebElement EmailField => Driver.FindElement(By.Id("userEmail"));
-
         public IWebElement MobilePhoneField => Driver.FindElement(By.Id("userNumber"));
-
         public IWebElement DateOfBirthField => Driver.FindElement(By.Id("dateOfBirthInput"));
-
         public IWebElement SubjectsField => Driver.FindElement(By.XPath("//*[@id='subjectsContainer']/div/div[1]"));
-
         public IWebElement CurrentAddressField => Driver.FindElement(By.Id("currentAddress"));
-
         public IWebElement MaleGenderRadioButton => Driver.FindElement(By.XPath("//label[@for='gender-radio-1']"));
         public IWebElement SportsCheckBox => Driver.FindElement(By.XPath("//label[@for='hobbies-checkbox-1']"));
         public IWebElement ReadingCheckBox => Driver.FindElement(By.XPath("//label[@for='hobbies-checkbox-2']"));

@@ -21,8 +21,13 @@ namespace CSharp_Selenium_DemoQA.Tests
             Driver.Manage().Window.Maximize();
 
             TheTestUser = new TestUser();
+            TheTestUser.FirstName = "Ken";
+            TheTestUser.LastName = "Block";
             TheTestUser.FullName = "Ken Block";
             TheTestUser.Email = "my@testing.com";
+            TheTestUser.Age = "43";
+            TheTestUser.Salary = "1000000";
+            TheTestUser.Department = "Quality Assurance";
             TheTestUser.CurrentAddress = "485 Greenview Drive, Ballston Spa, NY 12020";
             TheTestUser.PermanentAddress = "Noelle Adams, 6351 Fringilla Avenue, Gardena Colorado 37547, (559) 104-5475";
         }
@@ -90,9 +95,32 @@ namespace CSharp_Selenium_DemoQA.Tests
         }
 
         [TestMethod]
+        [Description("Web Tables")]
         public void WebTables()
         {
+            var webTablesPage = new WebTablesPage(Driver);
+            webTablesPage.GoTo();
+            Assert.AreEqual("Web Tables", webPageMainHeader.Text);
 
+            webTablesPage.AddNewRecordToTheTableAndSubmit(TheTestUser);
+            Assert.AreEqual("Ken", webTablesPage.Cells[21].Text);
+            Assert.AreEqual("Block", webTablesPage.Cells[22].Text);
+
+            webTablesPage.DeleteLastRowFromTheTable();
+            Assert.IsTrue(string.IsNullOrEmpty(webTablesPage.Cells[21].GetAttribute("textContent").Trim()));
+            
+            webTablesPage.AddNewRecordToTheTableAndSubmit(TheTestUser);
+            
+            webTablesPage.EditLastRecordInTheTable();
+            Assert.AreEqual("500000", webTablesPage.Cells[25].Text);
+            
+            webTablesPage.SearchRecordsInTheTable();
+            Assert.AreEqual("Ken", webTablesPage.Cells[0].Text);
+
+            /*foreach (var cell in webTablesPage.Cells)
+            {
+                Console.WriteLine(cell.Text);
+            }*/                       
         }
 
         [TestMethod]
@@ -112,8 +140,8 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var chromeOptions = new ChromeOptions();
-            chromeOptions.AddArgument("--headless");
-            chromeOptions.AddArgument("--window-size=1920,1080");
+            chromeOptions.AddArgument("--headless"); // unlock for CI
+            chromeOptions.AddArgument("--window-size=1920,1080"); // unlock for CI
             return new ChromeDriver(outPutDirectory, chromeOptions);
         }
     }

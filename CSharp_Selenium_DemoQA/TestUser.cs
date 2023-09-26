@@ -12,5 +12,8 @@
         public string PermanentAddress { get; set; }
         public string Subjects { get; set; }
         public Gender GenderType { get; set; }
+        public string Age { get; set; }
+        public string Salary { get; set; }
+        public string Department { get; set; }
     }
 }
