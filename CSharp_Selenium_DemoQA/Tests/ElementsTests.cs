@@ -1,6 +1,8 @@
 using CSharp_Selenium_DemoQA.Pages.Elements;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.DevTools;
+using OpenQA.Selenium.Remote;
 using System.Reflection;
 using System.Xml.Linq;
 
@@ -124,9 +126,31 @@ namespace CSharp_Selenium_DemoQA.Tests
         }
 
         [TestMethod]
+        [Description("Buttons")]
         public void Buttons()
         {
+            var buttonsPage = new ButtonsPage(Driver);
+            buttonsPage.GoTo();
+            Assert.AreEqual("Buttons", webPageMainHeader.Text);
 
+            buttonsPage.DoubleClick();
+            buttonsPage.RightClick();
+            buttonsPage.JustClick();
+
+            Assert.AreEqual("You have done a double click", buttonsPage.DoubleClickMessage.Text);
+            Assert.AreEqual("You have done a right click", buttonsPage.RightClickMessage.Text);
+            Assert.AreEqual("You have done a dynamic click", buttonsPage.JustClickMessage.Text);
+        }
+
+        [TestMethod]
+        [Description("Links")]
+        public void Links()
+        {
+            var linksPage = new LinksPage(Driver);
+            linksPage.GoTo();
+            Assert.AreEqual("Links", webPageMainHeader.Text);
+
+            linksPage.CheckStatuses();
         }
 
         [TestCleanup]

@@ -23,6 +23,7 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
         public ReadOnlyCollection<IWebElement> Rows => Driver.FindElements(By.XPath("//div[@class='rt-tbody']//div[@role='row']"));
         public IWebElement Container => Driver.FindElement(By.XPath("//div[@class='rt-tr -odd']/../.."));
         public IList<IWebElement> Cells => Container.FindElements(By.XPath("//div[@class='rt-td']"));
+        
 
         internal void AddNewRecordToTheTableAndSubmit(TestUser user)
         {
