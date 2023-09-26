@@ -57,10 +57,9 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
                 if (lastResponseEventArgs != null)
                 {
                     int actualStatusCode = ((int)lastResponseEventArgs.ResponseStatusCode);
-                    Console.WriteLine($"Link '{link.Text}' returned status code: {actualStatusCode}");
-
-                    // Re-fetch the StatusCodeForAssertion element after each click
                     IWebElement updatedStatusCodeForAssertion = StatusCodeForAssertion;
+                    Console.WriteLine($"Link '{link.Text}' returned status code: {actualStatusCode}, while it should return {updatedStatusCodeForAssertion.Text}");
+                    
                     Assert.AreEqual(updatedStatusCodeForAssertion.Text, actualStatusCode.ToString());
                 }
             }
