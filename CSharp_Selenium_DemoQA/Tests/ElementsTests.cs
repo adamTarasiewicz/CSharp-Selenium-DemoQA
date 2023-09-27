@@ -153,6 +153,18 @@ namespace CSharp_Selenium_DemoQA.Tests
             linksPage.CheckStatuses();
         }
 
+        [TestMethod]
+        [Description("Broken Links - Images")]
+        public void BrokenLinksAndImages()
+        {
+            var brokenLinksPage = new BrokenLinksPage(Driver);
+            brokenLinksPage.GoTo();
+            Assert.AreEqual("Broken Links - Images", webPageMainHeader.Text);
+
+            brokenLinksPage.IsImageBroken();
+            brokenLinksPage.IsLinkBroken();
+        }
+
         [TestCleanup]
         public void CleanUpAfterEveryTestMethod()
         {
