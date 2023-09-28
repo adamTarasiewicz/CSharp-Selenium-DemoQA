@@ -165,6 +165,20 @@ namespace CSharp_Selenium_DemoQA.Tests
             brokenLinksPage.IsLinkBroken();
         }
 
+        [TestMethod]
+        [Description("Dynamic Properties")]
+        public void DynamicProperties()
+        {
+            var dynamicPropertiesPage = new DynamicPropertiesPage(Driver);
+            dynamicPropertiesPage.GoTo();
+            Assert.AreEqual("Dynamic Properties", webPageMainHeader.Text);
+
+            dynamicPropertiesPage.CheckTextHasDifferentIDEachReaload();
+            dynamicPropertiesPage.CheckButtonEnabledWithin5Seconds();
+            dynamicPropertiesPage.CheckButtonColorChange();
+            dynamicPropertiesPage.CheckButtonVisibleWithin5Seconds();
+        }
+
         [TestCleanup]
         public void CleanUpAfterEveryTestMethod()
         {
