@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using System;
 
 namespace CSharp_Selenium_DemoQA.Tests
 {
@@ -10,6 +11,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
         }
 
+        // Elements
         public IWebElement FirstAlertButton => Driver.FindElement(By.Id("alertButton"));
         public IWebElement SecondTimerAlertButton => Driver.FindElement(By.Id("timerAlertButton"));
         public IWebElement ThirdConfirmButton => Driver.FindElement(By.Id("confirmButton"));
@@ -17,69 +19,53 @@ namespace CSharp_Selenium_DemoQA.Tests
         public IWebElement ThirdConfirmButtonAssert => Driver.FindElement(By.Id("confirmResult"));
         public IWebElement FourthPromtButtonAssert => Driver.FindElement(By.Id("promptResult"));
 
-        internal void CheckAlerts(TestUser user)
+        // Wait for Alert and Return
+        private IAlert WaitForAlert()
         {
-            //1 FirstAlertButton
-            FirstAlertButton.Click();
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.AlertIsPresent());
-            IAlert alert = Driver.SwitchTo().Alert();
+            return Driver.SwitchTo().Alert();
+        }
 
+        // Assert Alert Text
+        private void AssertAlertText(IAlert alert, string expectedText)
+        {
             string alertText = alert.Text;
-            Assert.AreEqual("You clicked a button", alertText, "Alert text message mismatch");
+            Assert.AreEqual(expectedText, alertText, "Alert text message mismatch");
+        }
+
+        internal void CheckAlerts(TestUser user)
+        {
+            // FirstAlertButton
+            FirstAlertButton.Click();
+            IAlert alert = WaitForAlert();
+            AssertAlertText(alert, "You clicked a button");
             alert.Accept();
 
-            Driver.SwitchTo().DefaultContent();
-
-
-
-            //2 SecondTimerAlertButton
+            // SecondTimerAlertButton
             SecondTimerAlertButton.Click();
-            wait.Until(ExpectedConditions.AlertIsPresent());
-            IAlert secondAlert = Driver.SwitchTo().Alert();
+            alert = WaitForAlert();
+            AssertAlertText(alert, "This alert appeared after 5 seconds");
+            alert.Accept();
 
-            string secondAlertText = secondAlert.Text;
-            Assert.AreEqual("This alert appeared after 5 seconds", secondAlertText, "Alert text message mismatch");
-            secondAlert.Accept();
-
-            Driver.SwitchTo().DefaultContent();
-
-
-
-            //3 ThirdConfirmButton
+            // ThirdConfirmButton - OK
             ThirdConfirmButton.Click();
-            wait.Until(ExpectedConditions.AlertIsPresent());
-            IAlert thirdAlertOK = Driver.SwitchTo().Alert();
-            thirdAlertOK.Accept();
+            alert = WaitForAlert();
+            alert.Accept();
+            Assert.IsTrue(ThirdConfirmButtonAssert.Text.Contains("Ok"), "The expected text 'Ok' was not found in the span element.");
 
-            string thirdAlertOKText = ThirdConfirmButtonAssert.Text;
-            Assert.IsTrue(thirdAlertOKText.Contains("Ok"), "The expected text 'Ok' was not found in the span element.");
-            
-
+            // ThirdConfirmButton - Cancel
             ThirdConfirmButton.Click();
-            wait.Until(ExpectedConditions.AlertIsPresent());
-            IAlert thirdAlertCancel = Driver.SwitchTo().Alert();
-            thirdAlertCancel.Dismiss();
+            alert = WaitForAlert();
+            alert.Dismiss();
+            Assert.IsTrue(ThirdConfirmButtonAssert.Text.Contains("Cancel"), $"The expected text 'Cancel' was not found in the span element. Found {ThirdConfirmButtonAssert.Text} instead.");
 
-            string thirdAlertCancelText = ThirdConfirmButtonAssert.Text;
-            Assert.IsTrue(thirdAlertCancelText.Contains("Cancel"), $"The expected text 'Cancel' was not found in the span element. Found {thirdAlertCancelText} instad.");
-            
-            Driver.SwitchTo().DefaultContent();
-
-
-            //4 FourthPromtButton
+            // FourthPromtButton
             FourthPromtButton.Click();
-            wait.Until(ExpectedConditions.AlertIsPresent());
-            IAlert fourthAlert = Driver.SwitchTo().Alert();
-            
-            fourthAlert.SendKeys(user.FullName);
-
-            fourthAlert.Accept();
-            
-            string fourthAlertOKText = FourthPromtButtonAssert.Text;
-            Assert.IsTrue(fourthAlertOKText.Contains("Ken Block"), $"The expected text 'Ken Block' was not found in the span element. Found {fourthAlertOKText} instead.");
-            Driver.SwitchTo().DefaultContent();
-
+            alert = WaitForAlert();
+            alert.SendKeys(user.FullName);
+            alert.Accept();
+            Assert.IsTrue(FourthPromtButtonAssert.Text.Contains(user.FullName), $"The expected text '{user.FullName}' was not found in the span element. Found {FourthPromtButtonAssert.Text} instead.");
         }
 
         internal void GoTo()

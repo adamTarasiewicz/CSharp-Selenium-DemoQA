@@ -61,8 +61,8 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var chromeOptions = new ChromeOptions();
-            chromeOptions.AddArgument("--headless"); // unlock for CI
-            chromeOptions.AddArgument("--window-size=1920,1080"); // unlock for CI
+            //chromeOptions.AddArgument("--headless"); // unlock for CI
+            //chromeOptions.AddArgument("--window-size=1920,1080"); // unlock for CI
             return new ChromeDriver(outPutDirectory, chromeOptions);
         }
     }
