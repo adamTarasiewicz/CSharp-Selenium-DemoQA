@@ -1,0 +1,54 @@
+﻿using CSharp_Selenium_DemoQA.Pages.Elements;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.DevTools;
+using OpenQA.Selenium.Remote;
+using System.Reflection;
+using System.Xml.Linq;
+
+namespace CSharp_Selenium_DemoQA.Tests
+{
+    [TestClass]
+    [TestCategory("Alerts, Frame & Windows")]
+    public class AlertsFrameWindowsTests
+    {
+        private IWebDriver Driver { get; set; }
+        private IWebElement webPageMainHeader => Driver.FindElement(By.XPath("//div[@class='main-header']"));
+
+        [TestInitialize]
+        public void SetupForEverySingleTestMethod()
+        {
+            Driver = GetChromeDriver();
+            Driver.Manage().Window.Maximize();
+        }
+
+        [TestMethod]
+        [Description("Text box")]
+        public void BrowserWindows()
+        {
+            var browserWindowsPage = new BrowserWindowsPage(Driver);
+            browserWindowsPage.GoTo();
+            Assert.AreEqual("Browser Windows", webPageMainHeader.Text);
+
+            browserWindowsPage.CheckNewTab();
+            //browserWindowsPage.CheckNewWindow();
+            //browserWindowsPage.CheckNewWindowMessage();
+        }
+
+        [TestCleanup]
+        public void CleanUpAfterEveryTestMethod()
+        {
+            Driver.Close();
+            Driver.Quit();
+        }
+
+        private IWebDriver GetChromeDriver()
+        {
+            var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var chromeOptions = new ChromeOptions();
+            chromeOptions.AddArgument("--headless"); // unlock for CI
+            chromeOptions.AddArgument("--window-size=1920,1080"); // unlock for CI
+            return new ChromeDriver(outPutDirectory, chromeOptions);
+        }
+    }
+}
