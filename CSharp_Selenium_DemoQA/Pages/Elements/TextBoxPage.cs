@@ -31,7 +31,7 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
         }
         internal void GoTo()
         {
-            Driver.Navigate().GoToUrl("https://demoqa.com/elements?");
+            Driver.Navigate().GoToUrl("https://demoqa.com/elements");
         }
     }
 }

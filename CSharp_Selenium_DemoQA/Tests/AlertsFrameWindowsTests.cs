@@ -48,6 +48,21 @@ namespace CSharp_Selenium_DemoQA.Tests
             alertsPage.CheckAlerts(TheTestUser);
         }
 
+        [TestMethod]
+        [Description("Frames")]
+        public void Frames()
+        {
+            var framesPage = new FramesPage(Driver);
+            framesPage.GoTo();
+            Assert.AreEqual("Frames", webPageMainHeader.Text);
+
+            string frame1Content = framesPage.GetFrame1Content();
+            Assert.AreEqual("This is a sample page", frame1Content, "Frame 1 text mismatch");
+
+            string frame2Content = framesPage.GetFrame2Content();
+            Assert.AreEqual("This is a sample page", frame2Content, "Frame 2 text mismatch");
+        }
+
 
 
         [TestCleanup]
@@ -61,8 +76,8 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var chromeOptions = new ChromeOptions();
-            //chromeOptions.AddArgument("--headless"); // unlock for CI
-            //chromeOptions.AddArgument("--window-size=1920,1080"); // unlock for CI
+            chromeOptions.AddArgument("--headless"); // unlock for CI
+            chromeOptions.AddArgument("--window-size=1920,1080"); // unlock for CI
             return new ChromeDriver(outPutDirectory, chromeOptions);
         }
     }
