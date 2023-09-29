@@ -20,8 +20,6 @@ namespace CSharp_Selenium_DemoQA.Tests
 
             NewTabButton.Click();
 
-
-
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
             wait.Until(d => d.WindowHandles.Count > initialWindowCount);
 

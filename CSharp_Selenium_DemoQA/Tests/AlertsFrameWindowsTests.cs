@@ -14,16 +14,20 @@ namespace CSharp_Selenium_DemoQA.Tests
     {
         private IWebDriver Driver { get; set; }
         private IWebElement webPageMainHeader => Driver.FindElement(By.XPath("//div[@class='main-header']"));
+        internal TestUser TheTestUser { get; set; }
 
         [TestInitialize]
         public void SetupForEverySingleTestMethod()
         {
             Driver = GetChromeDriver();
             Driver.Manage().Window.Maximize();
+
+            TheTestUser = new TestUser();
+            TheTestUser.FullName = "Ken Block";
         }
 
         [TestMethod]
-        [Description("Text box")]
+        [Description("Browser Windows")]
         public void BrowserWindows()
         {
             var browserWindowsPage = new BrowserWindowsPage(Driver);
@@ -31,9 +35,20 @@ namespace CSharp_Selenium_DemoQA.Tests
             Assert.AreEqual("Browser Windows", webPageMainHeader.Text);
 
             browserWindowsPage.CheckNewTab();
-            //browserWindowsPage.CheckNewWindow();
-            //browserWindowsPage.CheckNewWindowMessage();
         }
+
+        [TestMethod]
+        [Description("Alerts")]
+        public void Alerts()
+        {
+            var alertsPage = new AlertsPage(Driver);
+            alertsPage.GoTo();
+            Assert.AreEqual("Alerts", webPageMainHeader.Text);
+
+            alertsPage.CheckAlerts(TheTestUser);
+        }
+
+
 
         [TestCleanup]
         public void CleanUpAfterEveryTestMethod()
