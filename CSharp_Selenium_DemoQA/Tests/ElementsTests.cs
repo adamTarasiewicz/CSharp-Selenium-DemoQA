@@ -134,11 +134,12 @@ namespace CSharp_Selenium_DemoQA.Tests
             Assert.AreEqual("Buttons", webPageMainHeader.Text);
 
             buttonsPage.DoubleClick();
-            buttonsPage.RightClick();
-            buttonsPage.JustClick();
-
             Assert.AreEqual("You have done a double click", buttonsPage.DoubleClickMessage.Text);
+
+            buttonsPage.RightClick();
             Assert.AreEqual("You have done a right click", buttonsPage.RightClickMessage.Text);
+
+            buttonsPage.JustClick();
             Assert.AreEqual("You have done a dynamic click", buttonsPage.JustClickMessage.Text);
         }
 
@@ -173,10 +174,18 @@ namespace CSharp_Selenium_DemoQA.Tests
             dynamicPropertiesPage.GoTo();
             Assert.AreEqual("Dynamic Properties", webPageMainHeader.Text);
 
-            dynamicPropertiesPage.CheckTextHasDifferentIDEachReaload();
-            dynamicPropertiesPage.CheckButtonEnabledWithin5Seconds();
-            dynamicPropertiesPage.CheckButtonColorChange();
-            dynamicPropertiesPage.CheckButtonVisibleWithin5Seconds();
+            string initialId = dynamicPropertiesPage.GetTextWithRandomIDAttribute("id");
+            Driver.Navigate().Refresh();
+            string newId = dynamicPropertiesPage.GetTextWithRandomIDAttribute("id");
+            Assert.AreNotEqual(initialId, newId, "The element ID did not change after reload.");
+
+            Assert.IsTrue(dynamicPropertiesPage.IsButtonEnabledWithin5Seconds(), "The button is not clickable.");
+
+            string expectedColor = "rgba(220, 53, 69, 1)";
+            string actualColor = dynamicPropertiesPage.GetButtonColor();
+            Assert.AreEqual(expectedColor, actualColor, "The button text color did not change to expected value.");
+
+            Assert.IsTrue(dynamicPropertiesPage.IsButtonVisibleWithin5Seconds(), "The button is not visible.");
         }
 
         [TestCleanup]
