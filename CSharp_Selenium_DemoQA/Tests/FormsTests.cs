@@ -34,6 +34,11 @@ namespace CSharp_Selenium_DemoQA.Tests
             TheTestUser.Subjects = "Computer Science";
             TheTestUser.CurrentAddress = "282 Fairfield Drive Houston, TX 77016";
         }
+        private void VerifyPageTitle(string expectedTitle)
+        {
+            string actualTitle = webPageMainHeader.Text;
+            Assert.AreEqual(expectedTitle, actualTitle, $"Expected title '{expectedTitle}' but got '{actualTitle}' instead");
+        }
 
         [TestMethod]
         [Description("Practice form")]
@@ -41,7 +46,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var practiceFormPage = new PracticeFormPage(Driver);
             practiceFormPage.GoTo();
-            Assert.AreEqual("Practice Form", webPageMainHeader.Text);
+            VerifyPageTitle("Practice Form");
 
             practiceFormPage.FillOutTheFormAndSubmit(TheTestUser);
 

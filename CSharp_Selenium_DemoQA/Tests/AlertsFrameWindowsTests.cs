@@ -25,6 +25,11 @@ namespace CSharp_Selenium_DemoQA.Tests
             TheTestUser = new TestUser();
             TheTestUser.FullName = "Ken Block";
         }
+        private void VerifyPageTitle(string expectedTitle)
+        {
+            string actualTitle = webPageMainHeader.Text;
+            Assert.AreEqual(expectedTitle, actualTitle, $"Expected title '{expectedTitle}' but got '{actualTitle}' instead");
+        }
 
         [TestMethod]
         [Description("Browser Windows")]
@@ -32,7 +37,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var browserWindowsPage = new BrowserWindowsPage(Driver);
             browserWindowsPage.GoTo();
-            Assert.AreEqual("Browser Windows", webPageMainHeader.Text);
+            VerifyPageTitle("Browser Windows");
 
             browserWindowsPage.CheckNewTab();
         }
@@ -43,7 +48,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var alertsPage = new AlertsPage(Driver);
             alertsPage.GoTo();
-            Assert.AreEqual("Alerts", webPageMainHeader.Text);
+            VerifyPageTitle("Alerts");
 
             alertsPage.CheckAlerts(TheTestUser);
         }
@@ -54,7 +59,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var framesPage = new FramesPage(Driver);
             framesPage.GoTo();
-            Assert.AreEqual("Frames", webPageMainHeader.Text);
+            VerifyPageTitle("Frames");
 
             string frame1Content = framesPage.GetFrame1Content();
             Assert.AreEqual("This is a sample page", frame1Content, "Frame 1 text mismatch");
@@ -62,8 +67,6 @@ namespace CSharp_Selenium_DemoQA.Tests
             string frame2Content = framesPage.GetFrame2Content();
             Assert.AreEqual("This is a sample page", frame2Content, "Frame 2 text mismatch");
         }
-
-
 
         [TestCleanup]
         public void CleanUpAfterEveryTestMethod()

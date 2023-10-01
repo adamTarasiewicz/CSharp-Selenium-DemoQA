@@ -33,6 +33,11 @@ namespace CSharp_Selenium_DemoQA.Tests
             TheTestUser.CurrentAddress = "485 Greenview Drive, Ballston Spa, NY 12020";
             TheTestUser.PermanentAddress = "Noelle Adams, 6351 Fringilla Avenue, Gardena Colorado 37547, (559) 104-5475";
         }
+        private void VerifyPageTitle(string expectedTitle)
+        {
+            string actualTitle = webPageMainHeader.Text;
+            Assert.AreEqual(expectedTitle, actualTitle, $"Expected title '{expectedTitle}' but got '{actualTitle}' instead");
+        }
 
         [TestMethod]
         [Description("Text box")]
@@ -40,7 +45,8 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var textBoxPage = new TextBoxPage(Driver);
             textBoxPage.GoTo();
-            Assert.AreEqual("Elements", webPageMainHeader.Text);
+            VerifyPageTitle("Elements");
+            
 
             Driver.FindElement(By.Id("item-0")).Click();
 
@@ -58,7 +64,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var checkBoxPage = new CheckBoxPage(Driver);
             checkBoxPage.GoTo();
-            Assert.AreEqual("Check Box", webPageMainHeader.Text);
+            VerifyPageTitle("Check Box");
 
             checkBoxPage.ExpandAll.Click();
             checkBoxPage.CollapseAll.Click();
@@ -82,7 +88,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var radioButtonPage = new RadioButtonPage(Driver);
             radioButtonPage.GoTo();
-            Assert.AreEqual("Radio Button", webPageMainHeader.Text);
+            VerifyPageTitle("Radio Button");
 
             radioButtonPage.Yes.Click();
             var selectedValue = radioButtonPage.YouHaveSelected.GetAttribute("textContent");
@@ -102,7 +108,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var webTablesPage = new WebTablesPage(Driver);
             webTablesPage.GoTo();
-            Assert.AreEqual("Web Tables", webPageMainHeader.Text);
+            VerifyPageTitle("Web Tables");
 
             webTablesPage.AddNewRecordToTheTableAndSubmit(TheTestUser);
             Assert.AreEqual("Ken", webTablesPage.Cells[21].Text);
@@ -131,7 +137,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var buttonsPage = new ButtonsPage(Driver);
             buttonsPage.GoTo();
-            Assert.AreEqual("Buttons", webPageMainHeader.Text);
+            VerifyPageTitle("Buttons");
 
             buttonsPage.DoubleClick();
             Assert.AreEqual("You have done a double click", buttonsPage.DoubleClickMessage.Text);
@@ -149,7 +155,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var linksPage = new LinksPage(Driver);
             linksPage.GoTo();
-            Assert.AreEqual("Links", webPageMainHeader.Text);
+            VerifyPageTitle("Links");
 
             linksPage.CheckStatuses();
         }
@@ -160,7 +166,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var brokenLinksPage = new BrokenLinksPage(Driver);
             brokenLinksPage.GoTo();
-            Assert.AreEqual("Broken Links - Images", webPageMainHeader.Text);
+            VerifyPageTitle("Broken Links - Images");
 
             brokenLinksPage.IsImageBroken();
             brokenLinksPage.IsLinkBroken();
@@ -172,7 +178,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var dynamicPropertiesPage = new DynamicPropertiesPage(Driver);
             dynamicPropertiesPage.GoTo();
-            Assert.AreEqual("Dynamic Properties", webPageMainHeader.Text);
+            VerifyPageTitle("Dynamic Properties");
 
             string initialId = dynamicPropertiesPage.GetTextWithRandomIDAttribute("id");
             Driver.Navigate().Refresh();
