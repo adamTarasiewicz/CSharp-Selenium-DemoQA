@@ -68,6 +68,38 @@ namespace CSharp_Selenium_DemoQA.Tests
             Assert.AreEqual("This is a sample page", frame2Content, "Frame 2 text mismatch");
         }
 
+        [TestMethod]
+        [Description("Nested Frames")]
+        public void NestedFrames()
+        {
+            var nestedFramesPage = new NestedFramesPage(Driver);
+            nestedFramesPage.GoTo();
+            VerifyPageTitle("Nested Frames");
+
+            string parentFrameContent = nestedFramesPage.GetParentFrameContent();
+            Assert.AreEqual("Parent frame", parentFrameContent, "Parent frame text mismatch");
+
+            string childFrameContent = nestedFramesPage.GetChildFrameContent();
+            Assert.AreEqual("Child Iframe", childFrameContent, "Child frame text mismatch");
+        }
+
+        [TestMethod]
+        [Description("Modal Dialogs")]
+        public void ModalDialogs()
+        {
+            var modalDialogsPage = new ModalDialogsPage(Driver);
+            modalDialogsPage.GoTo();
+            VerifyPageTitle("Modal Dialogs");
+
+            string smallModalText = modalDialogsPage.GetSmallModalText();
+            Assert.AreEqual("Small Modal", smallModalText, "Mismatch in Small Modal Text");
+            modalDialogsPage.CloseSmallModalDialog();
+
+            string largeModalText = modalDialogsPage.GetLargeModalText();
+            Assert.AreEqual("Large Modal", largeModalText, "Mismatch in Large Modal Text");
+            modalDialogsPage.CloseLargeModalDialog();
+        }
+
         [TestCleanup]
         public void CleanUpAfterEveryTestMethod()
         {
