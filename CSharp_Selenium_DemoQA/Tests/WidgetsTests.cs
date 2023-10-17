@@ -1,6 +1,6 @@
-﻿using CSharp_Selenium_DemoQA.Pages.Forms;
-using OpenQA.Selenium;
+﻿using CSharp_Selenium_DemoQA.Pages.Widgets;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +8,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace CSharp_Selenium_DemoQA.Tests
 {
     [TestClass]
-    [TestCategory("Forms")]
-    public class FormsTests
+    [TestCategory("Widgets Tests")]
+    public class WidgetsTests
     {
         private IWebDriver Driver { get; set; } = null!;
         private IWebElement webPageMainHeader => Driver.FindElement(By.XPath("//div[@class='main-header']"));
@@ -22,17 +23,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         public void SetupForEverySingleTestMethod()
         {
             Driver = GetChromeDriver();
-            // Driver.Manage().Window.Maximize();
-
-            TheTestUser = new TestUser();
-            TheTestUser.FirstName = "Joey";
-            TheTestUser.LastName = "Jordison";
-            TheTestUser.Email = "joey.jordison@slipknot.com";
-            TheTestUser.GenderType = Gender.Male;
-            TheTestUser.PhoneNumber = "1234567890";
-            TheTestUser.DateOfBirth = "04.26.1975";
-            TheTestUser.Subjects = "Computer Science";
-            TheTestUser.CurrentAddress = "282 Fairfield Drive Houston, TX 77016";
+            Driver.Manage().Window.Maximize();
         }
         private void VerifyPageTitle(string expectedTitle)
         {
@@ -41,16 +32,21 @@ namespace CSharp_Selenium_DemoQA.Tests
         }
 
         [TestMethod]
-        [Description("Practice form")]
-        public void PracticeForm()
+        [Description("Accordian")]
+        public void Accordian()
         {
-            var practiceFormPage = new PracticeFormPage(Driver);
-            practiceFormPage.GoTo();
-            VerifyPageTitle("Practice Form");
+            var accordianPage = new AccordianPage(Driver);
+            accordianPage.GoTo();
+            VerifyPageTitle("Accordian");
 
-            practiceFormPage.FillOutTheFormAndSubmit(TheTestUser);
+            int heightDifference1 = accordianPage.GetHeightDifferenceAfterClick(accordianPage.Section1Heading, accordianPage.Section1Content);
+            Assert.AreNotEqual(0, heightDifference1, "Section 1 did not unfold after the click.");
 
-            Assert.AreEqual("Thanks for submitting the form", Driver.FindElement(By.XPath("//div[@class='modal-title h4']")).GetAttribute("textContent"));
+            int heightDifference2 = accordianPage.GetHeightDifferenceAfterClick(accordianPage.Section2Heading, accordianPage.Section2Content);
+            Assert.AreNotEqual(0, heightDifference2, "Section 2 did not unfold after the click.");
+
+            int heightDifference3 = accordianPage.GetHeightDifferenceAfterClick(accordianPage.Section3Heading, accordianPage.Section3Content);
+            Assert.AreNotEqual(0, heightDifference3, "Section 3 did not unfold after the click.");
         }
 
         [TestCleanup]
@@ -64,9 +60,11 @@ namespace CSharp_Selenium_DemoQA.Tests
         {
             var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var chromeOptions = new ChromeOptions();
-            chromeOptions.AddArgument("--headless");
-            chromeOptions.AddArgument("--window-size=1920,1080");
+            chromeOptions.AddArgument("--headless"); // unlock for CI
+            chromeOptions.AddArgument("--window-size=1920,1080"); // unlock for CI
             return new ChromeDriver(outPutDirectory, chromeOptions);
         }
     }
 }
+
+

@@ -12,9 +12,9 @@ namespace CSharp_Selenium_DemoQA.Tests
     [TestCategory("Elements")]
     public class ElementsTests
     {
-        private IWebDriver Driver { get; set; }
+        private IWebDriver Driver { get; set; } = null!;
         private IWebElement webPageMainHeader => Driver.FindElement(By.XPath("//div[@class='main-header']"));
-        internal TestUser TheTestUser { get; set; }
+        internal TestUser TheTestUser { get; set; } = null!;
 
         [TestInitialize]
         public void SetupForEverySingleTestMethod()
