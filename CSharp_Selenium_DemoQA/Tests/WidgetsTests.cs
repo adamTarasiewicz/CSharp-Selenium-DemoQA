@@ -1,13 +1,7 @@
 ﻿using CSharp_Selenium_DemoQA.Pages.Widgets;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using OpenQA.Selenium.Chrome;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace CSharp_Selenium_DemoQA.Tests
 {
@@ -25,6 +19,7 @@ namespace CSharp_Selenium_DemoQA.Tests
             Driver = GetChromeDriver();
             Driver.Manage().Window.Maximize();
         }
+
         private void VerifyPageTitle(string expectedTitle)
         {
             string actualTitle = webPageMainHeader.Text;
@@ -66,5 +61,3 @@ namespace CSharp_Selenium_DemoQA.Tests
         }
     }
 }
-
-

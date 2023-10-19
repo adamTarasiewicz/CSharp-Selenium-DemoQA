@@ -4,11 +4,10 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
 {
     internal class TextBoxPage : BasePage
     {
-        // constructor
         public TextBoxPage(IWebDriver driver) : base(driver)
         {
         }
-        // properties
+
         public IWebElement FullNameField => Driver.FindElement(By.Id("userName"));
         public IWebElement EmailField => Driver.FindElement(By.Id("userEmail"));
         public IWebElement CurrentAddressField => Driver.FindElement(By.Id("currentAddress"));
@@ -19,7 +18,6 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
         public string PermanentAddress => Driver.FindElement(By.XPath("//p[@id='permanentAddress']")).GetAttribute("textContent");
         public IWebElement Submit => Driver.FindElement(By.Id("submit"));
 
-        // methods
         internal void FillOutFormAndSubmit(TestUser user)
         {
             FullNameField.SendKeys(user.FullName);
@@ -29,6 +27,7 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
 
             Submit.Click();
         }
+
         internal void GoTo()
         {
             Driver.Navigate().GoToUrl("https://demoqa.com/elements");

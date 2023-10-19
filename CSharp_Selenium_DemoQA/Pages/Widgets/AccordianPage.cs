@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System.Xml.Linq;
 
 namespace CSharp_Selenium_DemoQA.Pages.Widgets
 {

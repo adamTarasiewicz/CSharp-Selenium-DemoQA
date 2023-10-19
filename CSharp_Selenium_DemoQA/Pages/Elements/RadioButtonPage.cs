@@ -13,7 +13,6 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
         public IWebElement No => Driver.FindElement(By.Id("noRadio"));
         public IWebElement YouHaveSelected => Driver.FindElement(By.XPath("//p[@class='mt-3']//span[@class='text-success']"));
 
-
         internal void GoTo()
         {
             Driver.Navigate().GoToUrl("https://demoqa.com/radio-button");

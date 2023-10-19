@@ -1,9 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
-using System;
-using System.Reflection.Emit;
 
 namespace CSharp_Selenium_DemoQA.Pages.Forms
 {
@@ -59,7 +55,6 @@ namespace CSharp_Selenium_DemoQA.Pages.Forms
             SelectStateAndCity();
 
             Submit.Click();
-
         }
 
         private void SelectStateAndCity()
@@ -88,10 +83,13 @@ namespace CSharp_Selenium_DemoQA.Pages.Forms
                 case Gender.Male:
                     MaleGenderRadioButton.Click();
                     break;
+
                 case Gender.Female:
                     break;
+
                 case Gender.Other:
                     break;
+
                 default:
                     break;
             }
@@ -101,6 +99,5 @@ namespace CSharp_Selenium_DemoQA.Pages.Forms
         {
             Driver.Navigate().GoToUrl("https://demoqa.com/automation-practice-form");
         }
-
     }
 }

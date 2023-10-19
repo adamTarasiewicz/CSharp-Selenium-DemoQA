@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.DevTools.V114.Fetch;
 
 namespace CSharp_Selenium_DemoQA.Pages.Elements
 {
@@ -23,7 +22,6 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
         public IWebElement ForbiddenLink => Driver.FindElement(By.Id("forbidden"));
         public IWebElement NotFoundLink => Driver.FindElement(By.Id("invalid-url"));
         public IWebElement StatusCodeForAssertion => Driver.FindElement(By.CssSelector("#linkResponse > b:nth-child(1)"));
-
 
         internal void CheckStatuses()
         {
@@ -58,9 +56,9 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
                 {
                     int actualStatusCode = ((int)lastResponseEventArgs.ResponseStatusCode);
                     IWebElement updatedStatusCodeForAssertion = StatusCodeForAssertion;
-                    
+
                     Console.WriteLine($"Link '{link.Text}' returned status code: {actualStatusCode}, while it should return {updatedStatusCodeForAssertion.Text}"); //For checking the CI logs.
-                    
+
                     // Assert.AreEqual(updatedStatusCodeForAssertion.Text, actualStatusCode.ToString()); //Locked for CI to pass. Unlock to check locally.
                 }
             }

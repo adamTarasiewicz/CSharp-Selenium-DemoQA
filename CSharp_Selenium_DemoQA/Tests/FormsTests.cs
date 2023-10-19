@@ -1,12 +1,7 @@
 ﻿using CSharp_Selenium_DemoQA.Pages.Forms;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharp_Selenium_DemoQA.Tests
 {
@@ -34,6 +29,7 @@ namespace CSharp_Selenium_DemoQA.Tests
             TheTestUser.Subjects = "Computer Science";
             TheTestUser.CurrentAddress = "282 Fairfield Drive Houston, TX 77016";
         }
+
         private void VerifyPageTitle(string expectedTitle)
         {
             string actualTitle = webPageMainHeader.Text;

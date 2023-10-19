@@ -1,13 +1,12 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
-using System.Xml.Linq;
 
 namespace CSharp_Selenium_DemoQA.Pages.Elements
 {
     internal class DynamicPropertiesPage : BasePage
     {
-        public DynamicPropertiesPage(IWebDriver driver) : base(driver) 
+        public DynamicPropertiesPage(IWebDriver driver) : base(driver)
         {
         }
 

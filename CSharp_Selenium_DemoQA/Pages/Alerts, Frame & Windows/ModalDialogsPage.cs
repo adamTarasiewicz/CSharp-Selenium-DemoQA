@@ -7,7 +7,7 @@ namespace CSharp_Selenium_DemoQA.Tests
     internal class ModalDialogsPage : BasePage
     {
         private WebDriverWait wait;
-        
+
         public ModalDialogsPage(IWebDriver driver) : base(driver)
         {
             wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));

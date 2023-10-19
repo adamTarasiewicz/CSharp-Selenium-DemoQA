@@ -1,10 +1,6 @@
-﻿using CSharp_Selenium_DemoQA.Pages.Elements;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.DevTools;
-using OpenQA.Selenium.Remote;
 using System.Reflection;
-using System.Xml.Linq;
 
 namespace CSharp_Selenium_DemoQA.Tests
 {
@@ -25,6 +21,7 @@ namespace CSharp_Selenium_DemoQA.Tests
             TheTestUser = new TestUser();
             TheTestUser.FullName = "Ken Block";
         }
+
         private void VerifyPageTitle(string expectedTitle)
         {
             string actualTitle = webPageMainHeader.Text;

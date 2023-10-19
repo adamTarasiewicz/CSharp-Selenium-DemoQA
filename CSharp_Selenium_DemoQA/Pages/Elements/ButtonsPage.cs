@@ -1,12 +1,12 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using System;
 
 namespace CSharp_Selenium_DemoQA.Pages.Elements
 {
     internal class ButtonsPage : BasePage
     {
         private Actions actions;
+
         public ButtonsPage(IWebDriver driver) : base(driver)
         {
             actions = new Actions(Driver);
@@ -19,11 +19,11 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
         public IWebElement RightClickMessage => Driver.FindElement(By.Id("rightClickMessage"));
         public IWebElement JustClickMessage => Driver.FindElement(By.Id("dynamicClickMessage"));
 
-
         internal void DoubleClick()
         {
             actions.DoubleClick(DoubleClickMeButton).Perform();
         }
+
         internal void RightClick()
         {
             actions.ContextClick(RightClickMeButton).Perform();

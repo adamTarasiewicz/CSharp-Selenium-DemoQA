@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System.Net.Http;
 
 namespace CSharp_Selenium_DemoQA.Pages.Elements
 {
@@ -9,11 +8,9 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
         {
         }
 
-
         public IWebElement whereToLookForImagesAndLinks => Driver.FindElement(By.XPath("//div[@id='Ad.Plus-728x90']/following-sibling::div[1]"));
-        IList<IWebElement> images => whereToLookForImagesAndLinks.FindElements(By.TagName("img"));
-        IList<IWebElement> links => whereToLookForImagesAndLinks.FindElements(By.TagName("a"));
-
+        private IList<IWebElement> images => whereToLookForImagesAndLinks.FindElements(By.TagName("img"));
+        private IList<IWebElement> links => whereToLookForImagesAndLinks.FindElements(By.TagName("a"));
 
         internal void IsImageBroken()
         {

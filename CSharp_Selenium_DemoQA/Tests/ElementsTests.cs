@@ -1,10 +1,7 @@
 using CSharp_Selenium_DemoQA.Pages.Elements;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.DevTools;
-using OpenQA.Selenium.Remote;
 using System.Reflection;
-using System.Xml.Linq;
 
 namespace CSharp_Selenium_DemoQA.Tests
 {
@@ -33,6 +30,7 @@ namespace CSharp_Selenium_DemoQA.Tests
             TheTestUser.CurrentAddress = "485 Greenview Drive, Ballston Spa, NY 12020";
             TheTestUser.PermanentAddress = "Noelle Adams, 6351 Fringilla Avenue, Gardena Colorado 37547, (559) 104-5475";
         }
+
         private void VerifyPageTitle(string expectedTitle)
         {
             string actualTitle = webPageMainHeader.Text;
@@ -46,7 +44,6 @@ namespace CSharp_Selenium_DemoQA.Tests
             var textBoxPage = new TextBoxPage(Driver);
             textBoxPage.GoTo();
             VerifyPageTitle("Elements");
-            
 
             Driver.FindElement(By.Id("item-0")).Click();
 
@@ -56,7 +53,6 @@ namespace CSharp_Selenium_DemoQA.Tests
             Assert.AreEqual("Current Address :485 Greenview Drive, Ballston Spa, NY 12020 ", textBoxPage.CurrentAddress, "Element not found");
             Assert.AreEqual("Permananet Address :Noelle Adams, 6351 Fringilla Avenue, Gardena Colorado 37547, (559) 104-5475", textBoxPage.PermanentAddress);
         }
-
 
         [TestMethod]
         [Description("Check box")]
@@ -116,19 +112,19 @@ namespace CSharp_Selenium_DemoQA.Tests
 
             webTablesPage.DeleteLastRowFromTheTable();
             Assert.IsTrue(string.IsNullOrEmpty(webTablesPage.Cells[21].GetAttribute("textContent").Trim()));
-            
+
             webTablesPage.AddNewRecordToTheTableAndSubmit(TheTestUser);
-            
+
             webTablesPage.EditLastRecordInTheTable();
             Assert.AreEqual("500000", webTablesPage.Cells[25].Text);
-            
+
             webTablesPage.SearchRecordsInTheTable();
             Assert.AreEqual("Ken", webTablesPage.Cells[0].Text);
 
             /*foreach (var cell in webTablesPage.Cells)
             {
                 Console.WriteLine(cell.Text);
-            }*/                       
+            }*/
         }
 
         [TestMethod]
