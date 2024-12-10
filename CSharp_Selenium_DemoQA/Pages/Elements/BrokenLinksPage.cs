@@ -8,7 +8,7 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
         {
         }
 
-        public IWebElement whereToLookForImagesAndLinks => Driver.FindElement(By.XPath("//div[@id='Ad.Plus-728x90']/following-sibling::div[1]"));
+        public IWebElement whereToLookForImagesAndLinks => Driver.FindElement(By.XPath("//div[@id='Ad.Plus-970x250-1']/following-sibling::div[1]"));
         private IList<IWebElement> images => whereToLookForImagesAndLinks.FindElements(By.TagName("img"));
         private IList<IWebElement> links => whereToLookForImagesAndLinks.FindElements(By.TagName("a"));
 
@@ -21,7 +21,7 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
                 if (isImageReallyBroken)
                 {
                     // Log the broken image instead of asserting (for CI to pass)
-                    Console.WriteLine($"Image with src {image.GetAttribute("src")} is broken");
+                    Console.WriteLine($"Image with src {image.GetDomAttribute("src")} is broken");
                 }
             }
         }
@@ -33,7 +33,7 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
 
             foreach (var link in links)
             {
-                var href = link.GetAttribute("href");
+                var href = link.GetDomAttribute("href");
                 if (!string.IsNullOrEmpty(href)) // Ensure the link isn't empty
                 {
                     var response = httpClient.GetAsync(href).Result;

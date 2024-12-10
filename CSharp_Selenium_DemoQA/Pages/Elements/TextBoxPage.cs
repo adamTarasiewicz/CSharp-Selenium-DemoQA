@@ -12,10 +12,10 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
         public IWebElement EmailField => Driver.FindElement(By.Id("userEmail"));
         public IWebElement CurrentAddressField => Driver.FindElement(By.Id("currentAddress"));
         public IWebElement PermanentAddressField => Driver.FindElement(By.Id("permanentAddress"));
-        public string Name => Driver.FindElement(By.XPath("//p[@id='name']")).GetAttribute("textContent");
-        public string Email => Driver.FindElement(By.XPath("//p[@id='email']")).GetAttribute("textContent");
-        public string CurrentAddress => Driver.FindElement(By.XPath("//p[@id='currentAddress']")).GetAttribute("textContent");
-        public string PermanentAddress => Driver.FindElement(By.XPath("//p[@id='permanentAddress']")).GetAttribute("textContent");
+        public string Name => Driver.FindElement(By.XPath("//p[@id='name']")).GetDomProperty("textContent");
+        public string Email => Driver.FindElement(By.XPath("//p[@id='email']")).GetDomProperty("textContent");
+        public string CurrentAddress => Driver.FindElement(By.XPath("//p[@id='currentAddress']")).GetDomProperty("textContent");
+        public string PermanentAddress => Driver.FindElement(By.XPath("//p[@id='permanentAddress']")).GetDomProperty("textContent");
         public IWebElement Submit => Driver.FindElement(By.Id("submit"));
 
         internal void FillOutFormAndSubmit(TestUser user)
@@ -30,7 +30,7 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
 
         internal void GoTo()
         {
-            Driver.Navigate().GoToUrl("https://demoqa.com/elements");
+            Driver.Navigate().GoToUrl("https://demoqa.com/text-box");
         }
     }
 }

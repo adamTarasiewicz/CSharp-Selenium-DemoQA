@@ -10,7 +10,7 @@ namespace CSharp_Selenium_DemoQA.Tests
     public class WidgetsTests
     {
         private IWebDriver Driver { get; set; } = null!;
-        private IWebElement webPageMainHeader => Driver.FindElement(By.XPath("//div[@class='main-header']"));
+        private IWebElement webPageMainHeader => Driver.FindElement(By.XPath("//h1[@class='text-center']"));
         internal TestUser TheTestUser { get; set; } = null!;
 
         [TestInitialize]
