@@ -88,11 +88,11 @@ namespace CSharp_Selenium_DemoQA.Tests
             VerifyPageTitle("Radio Button");
 
             radioButtonPage.Yes.Click();
-            var selectedValue = radioButtonPage.YouHaveSelected.GetAttribute("textContent");
+            var selectedValue = radioButtonPage.YouHaveSelected.GetDomProperty("textContent");
             Assert.AreEqual("Yes", selectedValue);
 
             radioButtonPage.Impressive.Click();
-            var selectedValue2 = radioButtonPage.YouHaveSelected.GetAttribute("textContent");
+            var selectedValue2 = radioButtonPage.YouHaveSelected.GetDomProperty("textContent");
             Assert.AreEqual("Impressive", selectedValue2);
 
             bool noButton = radioButtonPage.No.Displayed;
@@ -112,7 +112,7 @@ namespace CSharp_Selenium_DemoQA.Tests
             Assert.AreEqual("Block", webTablesPage.Cells[22].Text);
 
             webTablesPage.DeleteLastRowFromTheTable();
-            Assert.IsTrue(string.IsNullOrEmpty(webTablesPage.Cells[21].GetAttribute("textContent").Trim()));
+            Assert.IsTrue(string.IsNullOrEmpty(webTablesPage.Cells[21].GetDomProperty("textContent").Trim()));
 
             webTablesPage.AddNewRecordToTheTableAndSubmit(TheTestUser);
 

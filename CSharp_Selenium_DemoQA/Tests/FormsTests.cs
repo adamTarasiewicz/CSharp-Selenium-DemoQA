@@ -46,7 +46,7 @@ namespace CSharp_Selenium_DemoQA.Tests
 
             practiceFormPage.FillOutTheFormAndSubmit(TheTestUser);
 
-            Assert.AreEqual("Thanks for submitting the form", Driver.FindElement(By.XPath("//div[@class='modal-title h4']")).GetAttribute("textContent"));
+            Assert.AreEqual("Thanks for submitting the form", Driver.FindElement(By.XPath("//div[@class='modal-title h4']")).GetDomProperty("textContent"));
         }
 
         [TestCleanup]
