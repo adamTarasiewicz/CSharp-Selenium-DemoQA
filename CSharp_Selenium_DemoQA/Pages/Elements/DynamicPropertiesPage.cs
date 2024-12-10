@@ -19,7 +19,7 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
 
         public string GetTextWithRandomIDAttribute(string attributeName)
         {
-            return TextWithRandomID.GetAttribute(attributeName);
+            return TextWithRandomID.GetDomProperty(attributeName);
         }
 
         public bool IsButtonEnabledWithin5Seconds()
@@ -29,7 +29,7 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
 
         public string GetButtonColor()
         {
-            wait.Until(d => d.FindElement(By.Id("colorChange")).GetAttribute("class").Contains("text-danger"));
+            wait.Until(d => d.FindElement(By.Id("colorChange")).GetDomAttribute("class").Contains("text-danger"));
             return ColorChangeButton.GetCssValue("color");
         }
 

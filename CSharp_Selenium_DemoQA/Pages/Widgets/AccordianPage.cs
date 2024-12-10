@@ -18,11 +18,11 @@ namespace CSharp_Selenium_DemoQA.Pages.Widgets
 
         internal int GetHeightDifferenceAfterClick(IWebElement heading, IWebElement content)
         {
-            int initialHeight = Convert.ToInt32(content.GetAttribute("clientHeight"));
+            int initialHeight = Convert.ToInt32(content.GetDomProperty("clientHeight"));
             heading.Click();
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-            wait.Until(driver => Convert.ToInt32(content.GetAttribute("clientHeight")) != initialHeight);
-            return Convert.ToInt32(content.GetAttribute("clientHeight")) - initialHeight;
+            wait.Until(driver => Convert.ToInt32(content.GetDomProperty("clientHeight")) != initialHeight);
+            return Convert.ToInt32(content.GetDomProperty("clientHeight")) - initialHeight;
         }
 
         internal void GoTo()

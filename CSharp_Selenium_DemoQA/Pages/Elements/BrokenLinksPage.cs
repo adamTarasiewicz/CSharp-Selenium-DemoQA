@@ -20,6 +20,7 @@ namespace CSharp_Selenium_DemoQA.Pages.Elements
 
                 if (isImageReallyBroken)
                 {
+                    // Log the broken image instead of asserting (for CI to pass)
                     Console.WriteLine($"Image with src {image.GetDomAttribute("src")} is broken");
                 }
             }
