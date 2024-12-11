@@ -1,4 +1,4 @@
-[![Build Status](http://localhost:8080/job/CSharpSeleniumPipeline/20/badge/icon)](http://localhost:8080/job/CSharpSeleniumPipeline/20/)
+[![Build Status](http://localhost:8080/buildStatus/icon?job=CSharpSeleniumPipeline&build=20)](http://localhost:8080/job/CSharpSeleniumPipeline/20/)
 
 # C# | Selenium WebDriver | DemoQA.com
 
