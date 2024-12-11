@@ -100,6 +100,7 @@ namespace CSharp_Selenium_DemoQA.Tests
         }
 
         [TestMethod]
+        [DoNotParallelize]
         [Description("Web Tables")]
         public void WebTables()
         {
