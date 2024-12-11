@@ -1,4 +1,4 @@
-[![.NET Core CI](https://github.com/adamTarasiewicz/CSharp-Selenium-DemoQA/actions/workflows/main.yml/badge.svg)](https://github.com/adamTarasiewicz/CSharp-Selenium-DemoQA/actions/workflows/main.yml)
+[![Build Status](http://localhost:8080/job/CSharpSeleniumPipeline/20/badge/icon)](http://localhost:8080/job/CSharpSeleniumPipeline/20/)
 
 # C# | Selenium WebDriver | DemoQA.com
 
