@@ -1,4 +1,4 @@
-[![Build Status](http://localhost:8080/buildStatus/icon?job=CSharpSeleniumPipeline&build=20)](http://localhost:8080/job/CSharpSeleniumPipeline/20/)
+![Static Badge](https://img.shields.io/badge/build-passing-brightgreen)
 
 # C# | Selenium WebDriver | DemoQA.com
 
